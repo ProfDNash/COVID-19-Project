@@ -49,6 +49,8 @@ for state in stateList:
             pass
     ##write new values back into the table
     data.update(currStateData, join='left', overwrite=True)
+    ##fix datatypes so that dates/counts/etc display correctly
+    data.astype(np.int64,errors='ignore')
 
 
 ##write edited table to file for use in Tableau
