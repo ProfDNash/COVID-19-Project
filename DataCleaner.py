@@ -49,9 +49,10 @@ for state in stateList:
             pass
     ##write new values back into the table
     data.update(currStateData, join='left', overwrite=True)
-    ##fix datatypes so that dates/counts/etc display correctly
-    data.astype(np.int64,errors='ignore')
 
+##fix datatypes so that dates/counts/etc display correctly
+for c in ['date','deathIncrease', 'negativeIncrease','positiveIncrease', 'totalTestResultsIncrease']:
+    data[c] = data[c].fillna(0).astype(np.int64)
 
 ##write edited table to file for use in Tableau
 outputName = r'C:\Users\ProfN\Downloads\dailyCleaned.csv'
