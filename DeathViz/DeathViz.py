@@ -11,8 +11,8 @@ import matplotlib.pyplot as plt
 import matplotlib.cm as cm
 import seaborn as sns
 import geopandas as gpd
-from shapely.geometry import Point, Polygon  ##to check if a point is inside
-from scipy.ndimage.filters import gaussian_filter
+from shapely.geometry import Point  ##to check if a point is inside
+#from scipy.ndimage.filters import gaussian_filter
 from matplotlib.animation import FuncAnimation
 #import plotly.express as px  #doesn't look like this will work
 #from plotly.offline import plot 
@@ -72,7 +72,7 @@ def plotBoundaries(shape):
 
 
 def randCoord(county, num_coords=1):
-    ##generate a num_coords, random coordinates inside the county geometry
+    ##generate num_coords random coordinates inside the county geometry
     rand_coords = []
     xmin, ymin, xmax, ymax = county.bounds
     xdiff, ydiff = xmax-xmin, ymax-ymin
@@ -87,12 +87,12 @@ def randCoord(county, num_coords=1):
     rand_df = pd.DataFrame(rand_coords, columns=['latitude','longitude'])
     return rand_df
 
-def myplot(df, s, bins=1000): ##cool heatmap, but not super useful given wide range
-    heatmap, xedges, yedges = np.histogram2d(df.latitude, df.longitude, bins=bins)
-    heatmap = gaussian_filter(heatmap, sigma=s)
-
-    extent = [xedges[0], xedges[-1], yedges[0], yedges[-1]]
-    return heatmap.T, extent
+#def myplot(df, s, bins=1000): ##cool heatmap, but not super useful given wide range
+#    heatmap, xedges, yedges = np.histogram2d(df.latitude, df.longitude, bins=bins)
+#    heatmap = gaussian_filter(heatmap, sigma=s)
+#
+#    extent = [xedges[0], xedges[-1], yedges[0], yedges[-1]]
+#    return heatmap.T, extent
 
 def allCoords(counties, deaths):
     ##Take in a collection of counties and find random points within each county
