@@ -59,16 +59,16 @@ Ccounties = Ccounties[Ccounties.STATEFP!=15] ##Hawaii
 Cstates = Cstates[Cstates.STATEFP!=15] ##Hawaii
 
 ##to plot just the continental US
-def plotBoundaries(shape):
-    sns.set_palette('magma')
-    fig, ax = plt.subplots(figsize=(20,10))
-    g = shape.plot(ax=ax)
-    sns.despine(left=True, bottom=True)
-    ##xlim and ylim zoom in on the contiguous US only
-    #g.set(xlim=(-125,-67),ylim=(25,50),xticks=(),yticks=())
-    ##NY only
-    g.set(xlim=(-80,-72),ylim=(40.3,45.3),xticks=(),yticks=())
-    plt.show()
+#def plotBoundaries(shape):
+#    sns.set_palette('magma')
+#    fig, ax = plt.subplots(figsize=(20,10))
+#    g = shape.plot(ax=ax)
+#    sns.despine(left=True, bottom=True)
+#    ##xlim and ylim zoom in on the contiguous US only
+#    #g.set(xlim=(-125,-67),ylim=(25,50),xticks=(),yticks=())
+#    ##NY only
+#    g.set(xlim=(-80,-72),ylim=(40.3,45.3),xticks=(),yticks=())
+#    plt.show()
 
 
 def randCoord(county, num_coords=1):
@@ -79,7 +79,8 @@ def randCoord(county, num_coords=1):
     while len(rand_coords)<num_coords:
         rand_x, rand_y = 0,0
         rand_pt = Point(rand_x, rand_y)
-        while rand_pt.within(county)==False:
+        ##generate until the point is within the county
+        while rand_pt.within(county)==False: 
             rand_x = xmin+xdiff*np.random.rand()
             rand_y = ymin+ydiff*np.random.rand()
             rand_pt = Point(rand_x, rand_y)
